@@ -1,32 +1,65 @@
-@import url('./main-layout.css');    html, spreadsheet-view-export, grid-with-filters-view-export {
-      --lumo-shade: hsl(284, 35%, 15%);
-      --lumo-shade-5pct: hsla(284, 35%, 15%, 0.05);
-      --lumo-shade-10pct: hsla(284, 35%, 15%, 0.1);
-      --lumo-shade-20pct: hsla(284, 35%, 15%, 0.2);
-      --lumo-shade-30pct: hsla(284, 35%, 15%, 0.3);
-      --lumo-shade-40pct: hsla(284, 35%, 15%, 0.4);
-      --lumo-shade-50pct: hsla(284, 35%, 15%, 0.5);
-      --lumo-shade-60pct: hsla(284, 35%, 15%, 0.6);
-      --lumo-shade-70pct: hsla(284, 35%, 15%, 0.7);
-      --lumo-shade-80pct: hsla(284, 35%, 15%, 0.8);
-      --lumo-shade-90pct: hsla(284, 35%, 15%, 0.9);
-      --lumo-border-radius-s: calc(var(--lumo-size-m) / 6);
-      --lumo-border-radius-m: calc(var(--lumo-size-m) / 2);
-      --lumo-border-radius-l: var(--lumo-size-m);
+.home-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 18px;
+    border-radius: 22px;
+    box-shadow:
+            0 0 18px rgba(57, 255, 20, 0.45),
+            0 0 35px rgba(145, 40, 255, 0.35);
+}
 
-    }
+.neon-title {
+    font-size: 64px;
+    margin: 10px 0 12px;
+    color: #39ff14;
+    text-shadow:
+            0 0 6px rgba(57, 255, 20, 0.95),
+            0 0 18px rgba(57, 255, 20, 0.75),
+            0 0 34px rgba(57, 255, 20, 0.45);
+}
 
-    [theme~="dark"] {
-      --lumo-shade: hsl(292, 65%, 28%);
-      --lumo-shade-5pct: hsla(292, 65%, 28%, 0.05);
-      --lumo-shade-10pct: hsla(292, 65%, 28%, 0.1);
-      --lumo-shade-20pct: hsla(292, 65%, 28%, 0.2);
-      --lumo-shade-30pct: hsla(292, 65%, 28%, 0.3);
-      --lumo-shade-40pct: hsla(292, 65%, 28%, 0.4);
-      --lumo-shade-50pct: hsla(292, 65%, 28%, 0.5);
-      --lumo-shade-60pct: hsla(292, 65%, 28%, 0.6);
-      --lumo-shade-70pct: hsla(292, 65%, 28%, 0.7);
-      --lumo-shade-80pct: hsla(292, 65%, 28%, 0.8);
-      --lumo-shade-90pct: hsla(292, 65%, 28%, 0.9);
+.neon-slogan {
+    font-size: 26px;
+    color: #baff9d;
+    margin-bottom: 38px;
+    text-shadow:
+            0 0 5px rgba(57, 255, 20, 0.8),
+            0 0 14px rgba(57, 255, 20, 0.45);
+}
 
-    }
+.neon-text {
+    max-width: 920px;
+    font-size: 19px;
+    line-height: 1.75;
+    color: #7dff63;
+    text-shadow:
+            0 0 3px rgba(57, 255, 20, 0.45),
+            0 0 8px rgba(57, 255, 20, 0.25);
+}
+vaadin-side-nav-item[current]::part(content) {
+    background: rgba(57, 255, 20, 0.14);
+    color: #39ff14;
+    border-left: 3px solid #39ff14;
+}
+
+vaadin-side-nav-item::part(content):hover {
+    background: rgba(57, 255, 20, 0.10);
+    color: #39ff14;
+}
+.neon-button {
+    margin-top: 28px;
+    background: transparent;
+    color: #39ff14;
+    border: 2px solid #39ff14;
+    border-radius: 999px;
+    padding: 12px 28px;
+    font-weight: 800;
+    box-shadow:
+            0 0 10px rgba(57, 255, 20, 0.45),
+            inset 0 0 10px rgba(57, 255, 20, 0.18);
+}
+
+.neon-button:hover {
+    background: rgba(57, 255, 20, 0.12);
+}

@@ -1,86 +1,41 @@
 package com.example.application.views;
 
+import com.example.application.views.electronicsrepair.ElectronicsRepair;
+import com.example.application.views.offers.ServicesView;
+import com.example.application.views.prices.PricesView;
+
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.html.Footer;
-import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
-import com.vaadin.flow.router.AfterNavigationEvent;
-import com.vaadin.flow.router.AfterNavigationObserver;
-import com.vaadin.flow.router.Layout;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
-import com.vaadin.flow.server.menu.MenuConfiguration;
-import com.vaadin.flow.server.menu.MenuEntry;
-import com.vaadin.flow.theme.lumo.LumoUtility;
-import java.util.List;
+import com.vaadin.flow.theme.lumo.Lumo;
 
-/**
- * The main view is a top-level placeholder for other views.
- */
-@Layout
-@AnonymousAllowed
-public class MainLayout extends AppLayout implements AfterNavigationObserver {
-
-    private H1 viewTitle;
+public class MainLayout extends AppLayout {
 
     public MainLayout() {
-        setPrimarySection(Section.DRAWER);
-        addDrawerContent();
-        addHeaderContent();
-    }
+        UI.getCurrent().getElement().getThemeList().add(Lumo.DARK);
 
-    private void addHeaderContent() {
         DrawerToggle toggle = new DrawerToggle();
-        toggle.setAriaLabel("Menu toggle");
 
-        viewTitle = new H1();
-        viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
+        H2 appName = new H2("AlePou");
+        appName.addClassName("layout-title");
 
-        addToNavbar(true, toggle, viewTitle);
-    }
+        Header header = new Header(toggle, appName);
+        header.addClassName("main-header");
 
-    private void addDrawerContent() {
-        Span appName = new Span("My App");
-        appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD, LumoUtility.FontSize.LARGE);
-        Header header = new Header(appName);
+        addToNavbar(header);
 
-        Scroller scroller = new Scroller(createNavigation());
-
-        addToDrawer(header, scroller, createFooter());
-    }
-
-    private SideNav createNavigation() {
         SideNav nav = new SideNav();
 
-        List<MenuEntry> menuEntries = MenuConfiguration.getMenuEntries();
-        menuEntries.forEach(entry -> {
-            if (entry.icon() != null) {
-                nav.addItem(new SideNavItem(entry.title(), entry.path(), new SvgIcon(entry.icon())));
-            } else {
-                nav.addItem(new SideNavItem(entry.title(), entry.path()));
-            }
-        });
+        nav.addItem(new SideNavItem("Home", ElectronicsRepair.class));
+        nav.addItem(new SideNavItem("Offers", ServicesView.class));
+        nav.addItem(new SideNavItem("Prices", PricesView.class));
 
-        return nav;
-    }
-
-    private Footer createFooter() {
-        Footer layout = new Footer();
-
-        return layout;
-    }
-
-    @Override
-    public void afterNavigation(AfterNavigationEvent event) {
-        viewTitle.setText(getCurrentPageTitle());
-    }
-
-    private String getCurrentPageTitle() {
-        return MenuConfiguration.getPageHeader(getContent()).orElse("");
+        Scroller scroller = new Scroller(nav);
+        addToDrawer(scroller);
     }
 }
