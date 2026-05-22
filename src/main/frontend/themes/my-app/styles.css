@@ -1,0 +1,32 @@
+@import url('./main-layout.css');    html, spreadsheet-view-export, grid-with-filters-view-export {
+      --lumo-shade: hsl(284, 35%, 15%);
+      --lumo-shade-5pct: hsla(284, 35%, 15%, 0.05);
+      --lumo-shade-10pct: hsla(284, 35%, 15%, 0.1);
+      --lumo-shade-20pct: hsla(284, 35%, 15%, 0.2);
+      --lumo-shade-30pct: hsla(284, 35%, 15%, 0.3);
+      --lumo-shade-40pct: hsla(284, 35%, 15%, 0.4);
+      --lumo-shade-50pct: hsla(284, 35%, 15%, 0.5);
+      --lumo-shade-60pct: hsla(284, 35%, 15%, 0.6);
+      --lumo-shade-70pct: hsla(284, 35%, 15%, 0.7);
+      --lumo-shade-80pct: hsla(284, 35%, 15%, 0.8);
+      --lumo-shade-90pct: hsla(284, 35%, 15%, 0.9);
+      --lumo-border-radius-s: calc(var(--lumo-size-m) / 6);
+      --lumo-border-radius-m: calc(var(--lumo-size-m) / 2);
+      --lumo-border-radius-l: var(--lumo-size-m);
+
+    }
+
+    [theme~="dark"] {
+      --lumo-shade: hsl(292, 65%, 28%);
+      --lumo-shade-5pct: hsla(292, 65%, 28%, 0.05);
+      --lumo-shade-10pct: hsla(292, 65%, 28%, 0.1);
+      --lumo-shade-20pct: hsla(292, 65%, 28%, 0.2);
+      --lumo-shade-30pct: hsla(292, 65%, 28%, 0.3);
+      --lumo-shade-40pct: hsla(292, 65%, 28%, 0.4);
+      --lumo-shade-50pct: hsla(292, 65%, 28%, 0.5);
+      --lumo-shade-60pct: hsla(292, 65%, 28%, 0.6);
+      --lumo-shade-70pct: hsla(292, 65%, 28%, 0.7);
+      --lumo-shade-80pct: hsla(292, 65%, 28%, 0.8);
+      --lumo-shade-90pct: hsla(292, 65%, 28%, 0.9);
+
+    }
