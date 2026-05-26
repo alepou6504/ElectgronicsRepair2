@@ -1,6 +1,7 @@
 package com.example.application.views.prices;
 
 import com.example.application.views.MainLayout;
+import com.example.application.views.electronicsrepair.ElectronicsRepair;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -18,11 +19,12 @@ public class PricesView extends VerticalLayout {
         title.addClassName("neon-title");
 
         Paragraph text = new Paragraph(
-                "Our prices depend on the device, repair type, spare parts, and urgency. " +
-                        "Contact AlePou for a fast and fair repair offer."
+                "Our prices depend on the device, repair type, spare parts, and urgency." +
+                        " Contact AlePou for a fast and fair repair offer."
         );
         text.addClassName("neon-text");
 
-        add(title, text);
+        add(ElectronicsRepair.getHeader());
+
     }
 }

@@ -1,7 +1,7 @@
 package com.example.application.views;
 
 import com.example.application.views.electronicsrepair.ElectronicsRepair;
-import com.example.application.views.offers.ServicesView;
+import com.example.application.views.Service.ServicesView;
 import com.example.application.views.prices.PricesView;
 
 import com.vaadin.flow.component.UI;
