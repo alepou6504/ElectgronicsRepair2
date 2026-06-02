@@ -1,32 +1,34 @@
 package com.example.application.views.Service;
 
 import com.example.application.data.RepairOrder;
+import com.example.application.data.RepairOrderException;
 import com.github.javafaker.Faker;
-import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-@Getter
+//@Service
 public class RepairOrderService {
     private ArrayList<RepairOrder> orders;
 
-    public RepairOrderService() {
-        orders = new ArrayList<>(1000);
-    }
+    public RepairOrderService() {}
 
+    public ArrayList<RepairOrder> findAll() {
+        ArrayList<RepairOrder> copy = new ArrayList<>(orders);
+        return copy;
+    }
     public void addOrder(RepairOrder order) {
         orders.add(order);
     }
 
-    public void clearOrders() {
+    public void clearAll() {
         orders.clear();
     }
 
     public void fillTestData(int amount) {
         Faker faker = new Faker();
-        orders.clear();
+        //orders.clear();
 
         String[] deviceTypes = {
                 "Reception Tablet",
@@ -49,7 +51,7 @@ public class RepairOrderService {
 
             order.setOrderId((long)(i+1));
 
-    order.setCreatedAt(LocalDate.now().minusDays((faker.number().numberBetween(0,30))));
+    order.setCreatedAt(LocalDate.now().minusDays((faker.number().numberBetween(0,365))));
             order.setCompanyName(faker.company().name());
             order.setContactPerson(faker.name().fullName());
             order.setDeviceType(deviceTypes[faker.number().numberBetween(0
@@ -61,6 +63,21 @@ public class RepairOrderService {
 
             orders.add(order);
         }
+    }
+    public void addWrongOrder(){
+        RepairOrder order= new RepairOrder();
+
+        order.setOrderId((long) (orders.size()+1));
+        order.setCreatedAt(LocalDate.now());
+        order.setCompanyName("Wrong Company");
+        order.setContactPerson("Test Person");
+        order.setDeviceType("Hotel TV");
+        order.setProblemDescription("This is a test problem description");
+        order.setUrgency("Normal");
+
+        order.setEstimatedPrice(-20.0);
+        order.setBusinessCustomer(true);
+        orders.add(order);
     }
 
     @Override

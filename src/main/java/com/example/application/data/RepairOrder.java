@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+//lombok is a framework
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -15,21 +16,21 @@ import java.util.concurrent.atomic.AtomicLong;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = "orderId")
+@EqualsAndHashCode(of = "orderId", callSuper = false)
 @Entity
 public class RepairOrder extends RepairOrderService implements Cloneable {
 
-    @Id
-    private Long orderId;
+    @Id //primary key
+    private Long        orderId;
 
-    private LocalDate createdAt;
-    private String companyName;
-    private String contactPerson;
-    private String deviceType;
-    private String problemDescription;
-    private String urgency;
-    private Double estimatedPrice;
-    private Boolean businessCustomer;
+    private LocalDate   createdAt;
+    private String      companyName;
+    private String      contactPerson;
+    private String      deviceType;
+    private String      problemDescription;
+    private String      urgency;
+    private Double      estimatedPrice;
+    private Boolean     businessCustomer;
 
     private static final AtomicLong sequence = new AtomicLong(1000);
 
@@ -39,7 +40,7 @@ public class RepairOrder extends RepairOrderService implements Cloneable {
             "High",
             "Emergency"
     };
-    public RepairOrder() {
+    public RepairOrder() { //constructor
         setOrderId();
         setCreatedAt(LocalDate.now());
         setCompanyName("Unknown Company");
