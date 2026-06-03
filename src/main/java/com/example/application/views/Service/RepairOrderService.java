@@ -1,23 +1,25 @@
 package com.example.application.views.Service;
 
 import com.example.application.data.RepairOrder;
-import com.example.application.data.RepairOrderException;
 import com.github.javafaker.Faker;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-//@Service
+@Service
 public class RepairOrderService {
     private ArrayList<RepairOrder> orders;
 
-    public RepairOrderService() {}
-
-    public ArrayList<RepairOrder> findAll() {
-        ArrayList<RepairOrder> copy = new ArrayList<>(orders);
+    public RepairOrderService() {
+        orders= new ArrayList<>();
+        }
+        public ArrayList<RepairOrder> findAll(){
+        ArrayList<RepairOrder> copy= new ArrayList<>(orders);
         return copy;
-    }
+        }
+
     public void addOrder(RepairOrder order) {
         orders.add(order);
     }
