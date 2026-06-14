@@ -1,283 +1,195 @@
-/* GLOBAL APP PALETTE */
-html,
-body {
-    background: #12001f !important;
-    color: #39ff14 !important;
+/* ==========================================================================
+   ALEPOU CYBERPUNK PALETTE ENGINE
+   ========================================================================== */
+
+:root {
+    /* Lumo Engine Override */
+    --lumo-background-color:    #0b0014;
+    --lumo-base-color:          #0b0014;
+    --lumo-tint-10pct:          rgba(57, 255, 20, 0.1);
+    --lumo-tint-20pct:          rgba(57, 255, 20, 0.2);
+    --lumo-header-text-color:   #39ff14;
+    --lumo-body-text-color:     #7dff63;
+    --lumo-secondary-text-color:#baff9d;
+    --lumo-primary-text-color:  #39ff14;
+    --lumo-primary-color:       #39ff14;
+    --lumo-error-color:         #ff3366;
+
+    /* Custom Palette Variables */
+    --color-bg:        #0b0014;
+    --color-surface:   #12001f;
+    --color-surface-2: #17002b;
+    --color-border:    rgba(57, 255, 20, 0.25);
+    --color-primary:   #bd00ff;
+    --color-neon:      #39ff14;
+    --color-text:      #dcb3ff;
+    --color-text-muted:#a090c0;
+}
+
+/* ========== GLOBAL ========== */
+html, body {
+    background-color: var(--color-bg) !important;
+    color: var(--color-neon) !important;
     font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* APP LAYOUT */
+/* ========== APP SHELL ========== */
 vaadin-app-layout {
-    background: #12001f !important;
-    color: #39ff14 !important;
+    background-color: var(--color-bg) !important;
 }
 
-/* TOP BAR */
+/* ========== NAVBAR ========== */
 vaadin-app-layout::part(navbar) {
-    background: #1b0033 !important;
-    color: #39ff14 !important;
-    border-bottom: 1px solid rgba(57, 255, 20, 0.45);
+    background: linear-gradient(90deg, #1a0a2e, #17002b) !important;
+    border-bottom: 1px solid rgba(57, 255, 20, 0.35) !important;
+    box-shadow: 0 0 18px rgba(57, 255, 20, 0.12) !important;
 }
 
-/* LEFT DRAWER */
-vaadin-app-layout::part(drawer) {
-    background: #1b0033 !important;
-    color: #39ff14 !important;
-    border-right: 1px solid rgba(57, 255, 20, 0.45);
-}
-
-/* DRAWER TOGGLE */
 vaadin-drawer-toggle {
-    color: #39ff14 !important;
-}
-
-/* HEADER */
-.main-header {
-    width: 100%;
-    background: #1b0033 !important;
-    color: #39ff14 !important;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 0 18px;
+    color: var(--color-neon) !important;
 }
 
 .layout-title {
-    color: #39ff14 !important;
-    font-size: 28px;
-    font-weight: 900;
-    margin: 0;
-    text-shadow:
-            0 0 6px rgba(57, 255, 20, 0.9),
-            0 0 16px rgba(57, 255, 20, 0.65);
+    color: var(--color-neon) !important;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
 }
 
-/* SIDENAV */
+/* ========== DRAWER (Side Menu) ========== */
+vaadin-app-layout::part(drawer) {
+    background: linear-gradient(180deg, #17002b 0%, #0b0014 100%) !important;
+    border-right: 1px solid rgba(57, 255, 20, 0.35) !important;
+}
+
 vaadin-side-nav {
-    background: #1b0033 !important;
-    color: #39ff14 !important;
-    width: 100%;
+    background-color: transparent !important;
+    --lumo-primary-color: var(--color-neon);
+    --lumo-body-text-color: var(--color-text);
+    --lumo-base-color: transparent;
 }
 
 vaadin-side-nav-item {
-    background: #1b0033 !important;
-    color: #39ff14 !important;
+    font-family: 'Times New Roman', Times, serif !important;
+    font-style: italic !important;
+    font-size: 1.2rem !important;
+    letter-spacing: 0.05em;
 }
 
 vaadin-side-nav-item::part(content) {
-    background: #1b0033 !important;
-    color: #39ff14 !important;
-    font-weight: 600;
-}
-
-vaadin-side-nav-item[current]::part(content) {
-    background: rgba(57, 255, 20, 0.16) !important;
-    color: #39ff14 !important;
-    border-left: 4px solid #39ff14;
+    color: var(--color-text) !important;
+    font-weight: normal !important;
+    transition: background 0.15s ease, color 0.15s ease, text-shadow 0.15s ease;
 }
 
 vaadin-side-nav-item::part(content):hover {
-    background: rgba(57, 255, 20, 0.10) !important;
-    color: #39ff14 !important;
+    background-color: rgba(57, 255, 20, 0.1) !important;
+    color: var(--color-neon) !important;
+    text-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
 }
 
-/* MAIN CONTENT AREA */
-[slot="drawer"],
-[slot="navbar"] {
-    background: #1b0033 !important;
-    color: #39ff14 !important;
+vaadin-side-nav-item[current]::part(content) {
+    background-color: rgba(57, 255, 20, 0.14) !important;
+    color: var(--color-neon) !important;
+    border-left: 4px solid var(--color-neon) !important;
+    text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
 }
 
-.home-page,
-.content-page {
-    background: #12001f !important;
-    color: #39ff14 !important;
+/* ========== GRID / TABLE ========== */
+vaadin-grid {
+    background-color: var(--color-surface) !important;
+    color: #7dff63 !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 12px !important;
+    --lumo-base-color: var(--color-surface);
+    --lumo-body-text-color: #7dff63;
+    --lumo-contrast-5pct: rgba(57, 255, 20, 0.06);
+    --lumo-contrast-10pct: rgba(57, 255, 20, 0.1);
 }
 
-/* TEXT */
-h1,
-h2,
-h3,
-p,
-span,
-label {
-    color: #39ff14;
+vaadin-grid-cell-content {
+    background-color: var(--color-surface) !important;
+    color: #7dff63 !important;
 }
 
-/* BUTTONS */
+vaadin-grid::part(header-cell) {
+    background-color: var(--color-surface-2) !important;
+    color: var(--color-neon) !important;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(57, 255, 20, 0.45) !important;
+}
+
+vaadin-grid::part(cell) {
+    background-color: var(--color-surface) !important;
+    color: #7dff63 !important;
+    border-bottom: 1px solid rgba(57, 255, 20, 0.08) !important;
+}
+
+vaadin-grid::part(row):hover > * {
+    background: rgba(57, 255, 20, 0.07) !important;
+}
+
+vaadin-grid::part(selected-row) > * {
+    background: rgba(189, 0, 255, 0.12) !important;
+}
+
+/* ========== BUTTONS ========== */
 vaadin-button {
-    background: #250047 !important;
-    color: #39ff14 !important;
-    border: 1px solid rgba(57, 255, 20, 0.65);
-    box-shadow: 0 0 12px rgba(57, 255, 20, 0.25);
-}
-.home-logo {
-    width: 110px !important;
-    height: 110px !important;
-    object-fit: contain;
+    background-color: #21003d !important;
+    color: var(--color-neon) !important;
+    border: 1px solid rgba(57, 255, 20, 0.65) !important;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+    font-weight: bold;
 }
 
-.main-header {
-    height: 64px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-/* ===== AlePou clean neon theme ===== */
-
-html,
-body {
-    background: #0b0014 !important;
-    color: #39ff14 !important;
-    font-family: "Segoe UI", Arial, sans-serif;
-}
-
-/* Whole app */
-vaadin-app-layout {
-    background: #0b0014 !important;
-    color: #39ff14 !important;
-}
-
-/* Top navbar */
-vaadin-app-layout::part(navbar) {
-    background: #17002b !important;
-    color: #39ff14 !important;
-    border-bottom: 1px solid rgba(57, 255, 20, 0.35);
-    box-shadow: 0 0 18px rgba(57, 255, 20, 0.12);
-}
-
-/* Left drawer */
-vaadin-app-layout::part(drawer) {
-    background: #12001f !important;
-    color: #39ff14 !important;
-    border-right: 1px solid rgba(57, 255, 20, 0.35);
-}
-
-/* Header */
-.main-header {
-    height: 64px;
-    width: 100%;
-    background: #17002b !important;
-    color: #39ff14 !important;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-vaadin-drawer-toggle {
-    color: #39ff14 !important;
-}
-
-.layout-title {
-    color: #39ff14 !important;
-    font-size: 26px;
-    font-weight: 900;
-    margin: 0;
-    letter-spacing: 0.5px;
-    text-shadow:
-            0 0 5px rgba(57, 255, 20, 0.9),
-            0 0 14px rgba(57, 255, 20, 0.55);
-}
-
-/* If you keep small logo in navbar */
-.layout-logo {
-    width: 34px !important;
-    height: 34px !important;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
-}
-
-/* Drawer nav */
-vaadin-side-nav {
-    background: #12001f !important;
-    color: #39ff14 !important;
-    width: 100%;
-    padding-top: 10px;
-}
-
-/* Normal menu item */
-vaadin-side-nav-item::part(content) {
-    background: transparent !important;
-    color: #39ff14 !important;
-    font-weight: 700;
-    min-height: 44px;
-    padding-left: 18px;
-    border-radius: 0;
-    transition: background 0.15s ease, color 0.15s ease;
-}
-
-/* Hover menu item - text stays visible */
-vaadin-side-nav-item::part(content):hover {
-    background: rgba(57, 255, 20, 0.16) !important;
+vaadin-button:hover:not([theme~="tertiary"]) {
+    background-color: rgba(57, 255, 20, 0.14) !important;
     color: #baff9d !important;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+    cursor: pointer;
 }
 
-/* Current active menu item */
-vaadin-side-nav-item[current]::part(content) {
-    background: rgba(57, 255, 20, 0.18) !important;
-    color: #39ff14 !important;
-    border-left: 4px solid #39ff14;
-    box-shadow: inset 0 0 14px rgba(57, 255, 20, 0.10);
+/* ========== DIALOGS ========== */
+vaadin-dialog-overlay::part(overlay),
+vaadin-confirm-dialog-overlay::part(overlay) {
+    background-color: var(--color-surface-2) !important;
+    border: 2px solid rgba(57, 255, 20, 0.5);
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.25);
+    border-radius: 12px;
 }
 
-/* Main pages */
-.home-page,
-.content-page {
-    min-height: calc(100vh - 64px);
-    background:
-            radial-gradient(circle at top center, rgba(57, 255, 20, 0.05), transparent 280px),
-            #0b0014 !important;
-    color: #39ff14 !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-
-    text-align: center;
-    padding: 56px 36px;
-    box-sizing: border-box;
+/* ========== FORM INPUTS ========== */
+vaadin-text-field,
+vaadin-number-field,
+vaadin-date-picker,
+vaadin-combo-box {
+    --lumo-body-text-color: var(--color-neon);
 }
 
-/* Hero card for home content */
-.home-page > * {
-    max-width: 980px;
+vaadin-text-field::part(input-field),
+vaadin-number-field::part(input-field),
+vaadin-date-picker::part(input-field),
+vaadin-combo-box::part(input-field) {
+    background-color: var(--color-bg) !important;
+    border: 1px solid rgba(57, 255, 20, 0.35);
+    color: var(--color-neon) !important;
 }
 
-/* Logo on home page */
-.home-logo {
-    width: 90px !important;
-    height: 90px !important;
-    object-fit: contain;
-    margin-bottom: 18px;
-    border-radius: 18px;
-    box-shadow:
-            0 0 16px rgba(57, 255, 20, 0.35),
-            0 0 26px rgba(145, 40, 255, 0.35);
-}
-
-/* Text */
+/* ========== TYPOGRAPHY CLASSES ========== */
 .neon-title {
-    color: #39ff14 !important;
+    color: var(--color-neon) !important;
     font-size: 48px;
     font-weight: 900;
-    margin: 6px 0 12px;
     letter-spacing: 0.5px;
-    text-shadow:
-            0 0 5px rgba(57, 255, 20, 0.9),
-            0 0 16px rgba(57, 255, 20, 0.55);
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.9), 0 0 16px rgba(57, 255, 20, 0.55);
 }
 
 .neon-slogan {
     color: #baff9d !important;
     font-size: 24px;
     font-weight: 800;
-    margin: 0 0 28px;
-    text-shadow:
-            0 0 4px rgba(57, 255, 20, 0.7),
-            0 0 12px rgba(57, 255, 20, 0.35);
+    text-shadow: 0 0 4px rgba(57, 255, 20, 0.7), 0 0 12px rgba(57, 255, 20, 0.35);
 }
 
 .neon-text {
@@ -286,20 +198,22 @@ vaadin-side-nav-item[current]::part(content) {
     line-height: 1.7;
     max-width: 900px;
     text-align: center;
-    text-shadow:
-            0 0 3px rgba(57, 255, 20, 0.35);
+    text-shadow: 0 0 3px rgba(57, 255, 20, 0.35);
 }
 
-/* Buttons */
-vaadin-button {
-    background: #21003d !important;
-    color: #39ff14 !important;
-    border: 1px solid rgba(57, 255, 20, 0.65);
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+.home-logo {
+    width: 90px !important;
+    height: 90px !important;
+    object-fit: contain;
+    border-radius: 18px;
+    box-shadow: 0 0 16px rgba(57, 255, 20, 0.35), 0 0 26px rgba(145, 40, 255, 0.35);
 }
 
-vaadin-button:hover {
-    background: rgba(57, 255, 20, 0.14) !important;
-    color: #baff9d !important;
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+    background: var(--color-neon);
+    border-radius: 3px;
+    box-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
 }

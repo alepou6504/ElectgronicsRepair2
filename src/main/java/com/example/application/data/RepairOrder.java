@@ -1,160 +1,93 @@
 package com.example.application.data;
 
-import com.example.application.views.Service.RepairOrderService;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-//lombok is a framework
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = "orderId", callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "orderId")
 @Entity
-public class RepairOrder extends RepairOrderService implements Cloneable {
+public class RepairOrder implements Cloneable {
 
-    @Id //primary key
-    private Long        orderId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
 
-    private LocalDate   createdAt;
-    private String      companyName;
-    private String      contactPerson;
-    private String      deviceType;
-    private String      problemDescription;
-    private String      urgency;
-    private Double      estimatedPrice;
-    private Boolean     businessCustomer;
+    @NotNull(message = "Order date is required")
+    @PastOrPresent(message = "Date cannot be in the future.")
+    private LocalDate createdAt = LocalDate.now();
 
-    private static final AtomicLong sequence = new AtomicLong(1000);
+    @NotBlank(message = "Company name cannot be empty")
+    @Size(min = 2, max = 100, message = "Company name must be between 2 and 100 characters.")
+    private String companyName = "Unknown Company";
 
-    private static final String[] urgencies = {
-            "Low",
-            "Normal",
-            "High",
-            "Emergency"
-    };
-    public RepairOrder() { //constructor
-        setOrderId();
-        setCreatedAt(LocalDate.now());
-        setCompanyName("Unknown Company");
-        setContactPerson("Unknown Contact");
-        setDeviceType("Unknown Device");
-        setProblemDescription("No problem description yet");
-        setUrgency("Normal");
-        setEstimatedPrice(79.0);
-        setBusinessCustomer(true);
-    }
+    @NotBlank(message = "Contact person is required")
+    private String contactPerson = "Unknown Contact";
 
+    @NotBlank(message = "Device type is required")
+    private String deviceType = "Unknown Device";
+
+    @NotBlank(message = "Problem description cannot be empty")
+    @Size(min = 10, message = "Problem description must be at least 10 characters.")
+    private String problemDescription = "No problem description yet";
+
+    @NotBlank(message = "Urgency is required")
+    @Pattern(
+            regexp = "Low|Normal|High|Emergency",
+            message = "Must be: Low, Normal, High or Emergency"
+    )
+    private String urgency = "Normal";
+
+    @NotNull(message = "Price cannot be empty")
+    @DecimalMin(value = "29.0", message = "Minimum price is 29.00€")
+    @DecimalMax(value = "999.0", message = "Maximum price is 999.00€")
+    private Double estimatedPrice = 79.0;
+
+    @NotNull(message = "Please confirm you are a Business Customer")
+    private Boolean businessCustomer = true;
+
+    // Used for test data generation — orderId left null for DB auto-increment
     public RepairOrder(
-            LocalDate createdAt,
-            String companyName,
-            String contactPerson,
-            String deviceType,
-            String problemDescription,
-            String urgency,
-            Double estimatedPrice,
-            Boolean businessCustomer
+            LocalDate createdAt, String companyName, String contactPerson,
+            String deviceType, String problemDescription, String urgency,
+            Double estimatedPrice, Boolean businessCustomer
     ) {
-        setOrderId();
-        setCreatedAt(createdAt);
-        setCompanyName(companyName);
-        setContactPerson(contactPerson);
-        setDeviceType(deviceType);
-        setProblemDescription(problemDescription);
-        setUrgency(urgency);
-        setEstimatedPrice(estimatedPrice);
-        setBusinessCustomer(businessCustomer);
-    }
-
-    public RepairOrder(
-            Long orderId,
-            LocalDate createdAt,
-            String companyName,
-            String contactPerson,
-            String deviceType,
-            String problemDescription,
-            String urgency,
-            Double estimatedPrice,
-            Boolean businessCustomer
-    ) {
-        setOrderId(orderId);
-        setCreatedAt(createdAt);
-        setCompanyName(companyName);
-        setContactPerson(contactPerson);
-        setDeviceType(deviceType);
-        setProblemDescription(problemDescription);
-        setUrgency(urgency);
-        setEstimatedPrice(estimatedPrice);
-        setBusinessCustomer(businessCustomer);
-    }
-
-    public void setOrderId() {
-        this.orderId = sequence.getAndIncrement();
-    }
-    public void setOrderId(Long orderId){
-        this.orderId= orderId;
-    }
-
-    public void setCompanyName(String companyName) {
-        if (companyName == null || companyName.isBlank()) {
-            throw new RepairOrderException("Company name must not be empty");
-        }
-        this.companyName = companyName;
-    }
-
-    public void setDeviceType(String deviceType) {
-        if (deviceType == null || deviceType.isBlank()) {
-            throw new RepairOrderException("Device type must not be empty");
-        }
-        this.deviceType = deviceType;
-    }
-
-    public void setProblemDescription(String problemDescription) {
-        if (problemDescription == null || problemDescription.length() < 10) {
-            throw new RepairOrderException("Problem description must have at least 10 characters");
-        }
+        this.createdAt          = createdAt;
+        this.companyName        = companyName;
+        this.contactPerson      = contactPerson;
+        this.deviceType         = deviceType;
         this.problemDescription = problemDescription;
-    }
-
-    public void setUrgency(String urgency) {
-        if (!Arrays.asList(urgencies).contains(urgency)) {
-            throw new RepairOrderException("Wrong urgency. Must be: " + Arrays.toString(urgencies));
-        }
-        this.urgency = urgency;
-    }
-
-    public void setEstimatedPrice(Double estimatedPrice) {
-        if (estimatedPrice == null) {
-            throw new RepairOrderException("Estimated price must not be null");
-        }
-        if (estimatedPrice < 29) {
-            throw new RepairOrderException("Minimum repair price is 29.0 EUR");
-        }
-        if (estimatedPrice > 999) {
-            throw new RepairOrderException("Maximum repair price is 999.0 EUR");
-        }
-        this.estimatedPrice = estimatedPrice;
+        this.urgency            = urgency;
+        this.estimatedPrice     = estimatedPrice;
+        this.businessCustomer   = businessCustomer;
     }
 
     @Override
     public RepairOrder clone() {
-        return new RepairOrder(
-                orderId,
-                createdAt,
-                companyName,
-                contactPerson,
-                deviceType,
-                problemDescription,
-                urgency,
-                estimatedPrice,
-                businessCustomer
-        );
+        try {
+            return (RepairOrder) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Cloning failed for RepairOrder", e);
+        }
     }
 }
+/* Die Klasse RepairOrder stellt mein zentrales Domänenmodell dar. Ich habe sie als
+JPA-Entität deklarieert, damit sie direkt persistiert werden kann Um die Datensicherheit
+und Geschäftsregeln bereits auf unterster Ebene zu erzwingen, nutze ich die
+Jakarta.validation-Annotationen.
+  Code-dupliezierung un klobige Boilerplate-Strukturen habe ich durch den EInsatz
+von Lombok-Annotationen vermieden. Ein wichtiges architektonisches Detail ist zudem
+die Implementierung des Cloneable-Interfaces. Die überschrieben clone()-Methode ermöglicht es
+der User in der UI, Entitäten für Bearbeitungsprozesse im Formular tiefzukopieren.
+So stelle ich sicher, dass fehlerhafte oder abgebrochene User Inputs das Original-Objekt
+im Speicher nicht korrumpieren.
+ */
